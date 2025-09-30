@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append(r"C:\Users\Vinayak Kadate\yolov5")  # Add YOLOv5 path to sys.path
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "yolov5"))
 import torch
 import cv2
 import numpy as np
@@ -27,7 +27,7 @@ imgsz = check_img_size(640, s=model.stride)
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 # Set the path to Tesseract-OCR executable
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = os.getenv("TESSERACT_PATH", "tesseract")
 def detect_objects(image):
     """Perform object detection using YOLOv5 model"""
     # Ensure image is resized to match model's expected input size
